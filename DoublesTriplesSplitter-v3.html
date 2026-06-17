@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Quinielas: Dobles/Triples → Sencillas</title>
+
+    <!-- ICONO CIRCULAR AZUL REY -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,
+    <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'>
+    <circle cx='50' cy='50' r='50' fill='%230033cc'/>
+    </svg>">
+
+     <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="🔥 Quinielas México ">
+    <meta property="og:description" content="Participa en la mejores quinielas de futbol mexicano. Registra tus quinielas aqui en este enlace.">
+    <meta property="og:image" content="img/img.jpeg">
+     <!-- <meta property="og:url" content="https://tusitio.com"> -->
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_MX">
+
+    <style>
+        :root {
+            --bg: #0b0d10;
+            --card: #12161b;
+            --ink: #e8eef6;
+            --muted: #9fb0c3;
+            --accent: #4aa3ff;
+        }
+
+        body.light {
+            --bg: #f5f7fa;
+            --card: #ffffff;
+            --ink: #111;
+            --muted: #555;
+            --accent: #0066cc;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--ink);
+            transition: background .25s, color .25s
+        }
+
+        header {
+            padding: 10px 20px 6px;
+            text-align: center;
+            position: relative
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: clamp(17px, 2.2vw, 21px);
+            font-weight: 700
+        }
+
+        header p {
+            margin: .2rem auto 0;
+            max-width: 850px;
+            color: var(--muted);
+            font-size: 12px;
+            line-height: 1.35
+        }
+
+        .wrap {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 8px 16px 20px
+        }
+
+        .grid {
+            display: grid;
+            gap: 10px;
+            grid-template-columns: 1fr 1fr
+        }
+
+        @media (max-width: 680px) {
+            .grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        .box {
+            background: var(--card);
+            border: 1px solid #1f2430;
+            border-radius: 12px;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            min-height: 190px;
+            transition: background .25s, border-color .25s
+        }
+
+        body.light .box {
+            border-color: #ccc
+        }
+
+        label {
+            font-size: 11px;
+            color: var(--muted);
+            margin: 0 4px 5px
+        }
+
+        textarea {
+            width: 100%;
+            flex: 1;
+            resize: vertical;
+            min-height: 125px;
+            max-height: 220px;
+            padding: 10px 12px;
+            background: #0f1319;
+            color: var(--ink);
+            border: 1px solid #232a36;
+            border-radius: 10px;
+            line-height: 1.45;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+            font-size: 13px;
+            transition: background .25s, color .25s, border-color .25s;
+        }
+
+        body.light textarea {
+            background: #fff;
+            border-color: #ccc
+        }
+
+        .hint {
+            margin-top: 6px;
+            color: var(--muted);
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .count {
+            color: var(--accent);
+            font-weight: 600
+        }
+
+        a.sample {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px dashed var(--accent);
+            cursor: pointer
+        }
+
+        /* Switch */
+        .theme-toggle {
+            position: absolute;
+            top: 10px;
+            right: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .theme-toggle input {
+            cursor: pointer;
+            width: 36px;
+            height: 20px;
+            appearance: none;
+            background: #888;
+            border-radius: 20px;
+            position: relative;
+            outline: none;
+            transition: background .25s
+        }
+
+        .theme-toggle input::before {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background: #fff;
+            border-radius: 50%;
+            transition: transform .25s;
+        }
+
+        .theme-toggle input:checked {
+            background: var(--accent);
+        }
+
+        .theme-toggle input:checked::before {
+            transform: translateX(16px);
+        }
+
+        /* Botón copiar */
+        .copy-btn {
+            padding: 5px 9px;
+            font-size: 12px;
+            border: none;
+            border-radius: 6px;
+            background: var(--accent);
+            color: white;
+            cursor: pointer;
+            transition: background .2s;
+        }
+
+        .copy-btn:hover {
+            background: #318ce7;
+        }
+
+        @media (max-width: 860px) {
+            header {
+                padding-right: 86px;
+                text-align: left;
+            }
+
+            header p {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 680px) {
+            header {
+                padding: 10px 14px 6px;
+                text-align: center;
+            }
+
+            .theme-toggle {
+                position: static;
+                justify-content: center;
+                margin-top: 7px;
+            }
+
+            .wrap {
+                padding: 6px 10px 16px;
+            }
+
+            .box {
+                min-height: 175px;
+            }
+
+            textarea {
+                min-height: 110px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Convertir quinielas con dobles/triples → quinielas sencillas</h1>
+        <p>Formato: usa <b>L</b>, <b>E</b>, <b>V</b>. Para dobles/triples: <b>LE</b>, <b>LV</b>, <b>EV</b>, <b>LEV</b>.
+            Separadas por espacio.</p>
+        <div class="theme-toggle">
+            <span>☀️</span>
+            <input type="checkbox" id="themeSwitch">
+            <span>🌙</span>
+        </div> 
+    </header>
+
+    <div class="wrap">
+        <div class="grid">
+            <div class="box">
+                <label for="in">ENTRADA</label>
+                <textarea id="in" placeholder="Ejemplo:&#10;L  L  L  LV  L  V  LV"></textarea>
+                <div class="hint">
+                    <div class="hint-left">
+                        <a class="sample" id="loadSample">Cargar ejemplo</a>
+                    </div>
+                    <div class="hint-right">
+                        <button class="copy-btn danger" id="clearBtn">🗑 Limpiar</button>
+                          
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <label for="out">SALIDA (se generan N combinaciones)</label>
+                <textarea id="out" placeholder="Aquí verás las quinielas sencillas..." readonly></textarea>
+                <div class="hint">
+                    <span>Total: <span class="count" id="total">0</span></span>
+                    <button class="copy-btn" id="copyBtn">📋 Copiar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const $in = document.getElementById('in');
+        const $out = document.getElementById('out');
+        const $total = document.getElementById('total');
+        const $sample = document.getElementById('loadSample');
+        const $themeSwitch = document.getElementById('themeSwitch');
+        const $copyBtn = document.getElementById('copyBtn');
+
+        const ORDER = ['L', 'E', 'V'];
+
+        function isLEVToken(tok) {
+            return /^[LEV]+$/i.test(tok); // solo L/E/V (1-3 chars típicamente)
+        }
+
+        function normalizeToOptions(tok) {
+            // Convierte "VL"->["L","V"], "LEV"->["L","E","V"], "LL"->["L"]
+            const upper = tok.toUpperCase();
+            const seen = new Set();
+            const opts = [];
+            for (const l of ORDER) {
+                if (upper.includes(l) && !seen.has(l)) {
+                    seen.add(l);
+                    opts.push(l);
+                }
+            }
+            return opts; // 1..3 opciones
+        }
+
+        function parseInput(str) {
+            const raw = str.trim().split(/\s+/).filter(Boolean);
+            if (!raw.length) return { groups: [], label: '' };
+
+            // Encuentra índices de TODOS los tokens LEV en el orden original
+            const levIdx = [];
+            for (let i = 0; i < raw.length; i++) {
+                if (isLEVToken(raw[i])) levIdx.push(i);
+            }
+
+            // Validación estricta: exactamente 7 o 9 tokens LEV en total
+            const n = levIdx.length;
+            if (n !== 7 && n !== 9) {
+                return { error: `Se detectaron ${n} partidos válidos. Debes ingresar exactamente 7 o 9 tokens de L/E/V.`, groups: [], label: '' };
+            }
+
+            // Toma los PRIMEROS n tokens LEV como partidos
+            const cutoff = levIdx[n - 1]; // índice del último partido
+            const groups = levIdx.slice(0, n).map(i => normalizeToOptions(raw[i]));
+
+            // Lo que venga DESPUÉS del último partido es la etiqueta (con espacios)
+            const label = raw.slice(cutoff + 1).join(' ');
+
+            return { groups, label };
+        }
+
+        function countCombinations(groups) {
+            return groups.reduce((acc, g) => acc * g.length, 1);
+        }
+
+        function cartesian(groups, maxComb = 200000) {
+            let results = [''];
+            for (const opts of groups) {
+                const next = [];
+                for (const base of results) {
+                    for (const o of opts) {
+                        const line = base ? (base + ' ' + o) : o;
+                        next.push(line);
+                        if (next.length > maxComb) throw new Error('Demasiadas combinaciones.');
+                    }
+                }
+                results = next;
+            }
+            return results;
+        }
+
+        function render() {
+            const parsed = parseInput($in.value);
+
+            if (parsed.error) {
+                $out.value = '⚠️ ' + parsed.error;
+                $total.textContent = '0';
+                return;
+            }
+
+            const { groups, label } = parsed;
+            if (!groups.length) {
+                $out.value = '';
+                $total.textContent = '0';
+                return;
+            }
+
+            try {
+                const combos = countCombinations(groups);
+                if (combos > 200000) {
+                    throw new Error(`Demasiadas combinaciones (${combos}). Reduce dobles/triples.`);
+                }
+                const lines = cartesian(groups, 200000);
+                const finalLines = label ? lines.map(l => l + ' ' + label) : lines;
+                $out.value = finalLines.join('\n');
+                $total.textContent = finalLines.length;
+            } catch (e) {
+                $out.value = '⚠️ ' + e.message;
+                $total.textContent = '0';
+            }
+        }
+
+        $in.addEventListener('input', render);
+
+        $sample.addEventListener('click', (e) => {
+            e.preventDefault();
+            // 7 partidos + etiqueta con espacios
+            $in.value = 'L  L  L  L  L  L  LE  JAVIER LOPEZ';
+            render();
+        });
+
+        // Tema claro/oscuro
+        $themeSwitch.addEventListener('change', () => {
+            document.body.classList.toggle('light', !$themeSwitch.checked);
+        });
+        $themeSwitch.checked = true;
+
+        // Botón limpiar
+        const $clearBtn = document.getElementById('clearBtn');
+        $clearBtn.addEventListener('click', () => {
+            $in.value = '';
+            $out.value = '';
+            $total.textContent = '0';
+        });
+
+        // Botón copiar
+        $copyBtn.addEventListener('click', () => {
+            if (!$out.value.trim()) return;
+            navigator.clipboard.writeText($out.value).then(() => {
+                const oldText = $copyBtn.textContent;
+                $copyBtn.textContent = '✅ Copiado';
+                setTimeout(() => { $copyBtn.textContent = oldText; }, 1200);
+            });
+            // Limpiar campos 
+             $in.value = '';
+            $out.value = '';
+            $total.textContent = '0';
+        });
+
+        render();
+    </script>
+
+
+</body>
+
+</html>
